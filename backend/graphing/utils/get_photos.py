@@ -9,7 +9,7 @@ SCOPES = ['https://www.googleapis.com/auth/photoslibrary.readonly']
 
 
 def service_account_login():
-    for port in range(8080, 8090):
+    for port in range(8000, 8090):
         try:
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', SCOPES)
