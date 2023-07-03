@@ -6,6 +6,7 @@ from torchvision.models.detection import fasterrcnn_resnet50_fpn
 from torchvision.transforms import functional as F
 from PIL import Image
 
+# COCO dataset classes for indexing made predictions
 COCO_INSTANCE_CATEGORY_NAMES = [
     '__background__', 'person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus',
     'train', 'truck', 'boat', 'traffic light', 'fire hydrant', 'N/A', 'stop sign',
@@ -23,6 +24,10 @@ COCO_INSTANCE_CATEGORY_NAMES = [
 
 
 def load_image(image_path):
+    """
+    Load given image path into PIL image for processing.
+
+    """
     img = Image.open(image_path).convert("RGB")
     img = F.to_tensor(img)
     return img
@@ -31,12 +36,15 @@ def load_image(image_path):
 image_path = 'test/test2.jpeg'
 image = load_image(image_path)
 
+# load model
 model = fasterrcnn_resnet50_fpn(pretrained=True)
 model = model.eval()
 
+# make prediction
 with torch.no_grad():
     prediction = model([image])
 
+# filter predictions by score threshold
 threshold = 0.5
 filtered_prediction = []
 
@@ -51,7 +59,6 @@ for i in range(len(prediction[0]['labels'])):
 print(filtered_prediction)
 
 # draw bounding boxes
-
 fig, ax = plt.subplots(1)
 ax.imshow(image.permute(1, 2, 0))
 
