@@ -1,1 +1,0 @@
-# Fetch Google Photos images
