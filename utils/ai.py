@@ -33,7 +33,7 @@ def load_image(image_path):
     return img
 
 
-image_path = 'test/test2.jpeg'
+image_path = './test/1.jpeg'
 image = load_image(image_path)
 
 # load model
