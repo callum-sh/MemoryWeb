@@ -3,6 +3,7 @@ from django.apps import AppConfig
 import os
 from google_auth_oauthlib.flow import InstalledAppFlow
 import pickle
+import requests
 from django.conf import settings
 
 
@@ -21,8 +22,9 @@ class GraphingConfig(AppConfig):
     def service_account_login(self):
         for port in range(8080, 8090):
             try:
+                credentials_path = os.path.join(os.path.dirname(__file__), 'credentials.json')
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    '/home/joshpuglielli/Desktop/memory-web/MemoryWeb/backend/graphing/credentials.json', SCOPES)
+                    credentials_path, SCOPES)
                 creds = flow.run_local_server(port=port)
                 return creds
             except OSError as e:
