@@ -3,6 +3,8 @@ from django.apps import AppConfig
 import os
 from google_auth_oauthlib.flow import InstalledAppFlow
 import pickle
+from django.conf import settings
+
 
 SCOPES = ['https://www.googleapis.com/auth/photoslibrary.readonly']
 
@@ -14,7 +16,7 @@ class GraphingConfig(AppConfig):
     def ready(self):
         # Run your code here
         creds = self.service_account_login()
-        # os.environ['CREDS'] = creds
+        settings.CREDS = creds
 
     def service_account_login(self):
         for port in range(8080, 8090):
