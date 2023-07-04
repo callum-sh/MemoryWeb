@@ -1,0 +1,8 @@
+.photo-container {
+    display: grid;
+    gap: 20px; /* Adjust the gap between circles if needed */
+    padding: 20px;
+    overflow: auto;
+    height: 300%; /* Adjust the height of the container if needed */
+    width: 300%;
+}  
