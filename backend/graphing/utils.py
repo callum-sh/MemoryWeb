@@ -7,6 +7,7 @@ import torchvision
 from torchvision.models.detection import fasterrcnn_resnet50_fpn
 from torchvision.transforms import functional as F
 from PIL import Image
+import os
 
 import networkx as nx
 import datetime
@@ -148,8 +149,10 @@ SCOPES = ['https://www.googleapis.com/auth/photoslibrary.readonly']
 def service_account_login():
     for port in range(8080, 8090):
         try:
+            credentials_path = os.path.join(
+                os.path.dirname(__file__), 'credentials.json')
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                credentials_path, SCOPES)
             creds = flow.run_local_server(port=port)
             return creds
         except OSError as e:

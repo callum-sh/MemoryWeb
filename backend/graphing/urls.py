@@ -1,9 +1,7 @@
 from django.urls import path
-import utils
-
-
+from graphing.views import PhotoView
 from . import views
 
 urlpatterns = [
-    path('images', views.images, name='index'),
+    path('get-photos/', PhotoView.as_view(), name='get_photos'),
 ]
